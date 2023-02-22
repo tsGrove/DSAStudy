@@ -41,3 +41,76 @@ def find_number(custom_array, target_number):
 # find_number(my_array_q_3, 17)
 
 # Question 4 - How to find maximum product of two integers in the array where all elements are positive
+my_array_q_4 = np.array([1, 20, 30, 44, 5, 56, 57, 8, 9, 10, 31, 12, 13, 35, 16, 27, 58, 19, 21])
+
+def find_maximum_product(custom_array):
+    max_product = 0
+    for i in range(len(custom_array)):
+        for j in range(i + 1, len(custom_array)):
+            if custom_array[i] * custom_array[j] > max_product:
+                max_product = custom_array[i] * custom_array[j]
+                pairs = str(custom_array[i]) + "," + str(custom_array[j])
+    print(pairs)
+    print(max_product)
+
+find_maximum_product(my_array_q_4)
+
+# Question 5 - Create an algorithm to check that all elements in a list are unique
+my_list_q_5 = [1, 51, 72, 124, 71, 15, 62, 111, 552, 1]
+
+def check_for_unique(custom_list):
+    checked_elements = []
+    for i in custom_list:
+        if i in checked_elements:
+            print(i)
+            return False
+        else:
+            checked_elements.append(i)
+    return True
+
+# print(check_for_unique(my_list_q_5))
+
+# Question 6 - Given two strings, check if one is a permutation ( same characters, different orders) of another
+
+my_list_q_6a = [1, 2, 3]
+my_list_q_6b = [3, 2, 1]
+
+def check_permutation(custom_list_1, custom_list_2):
+    if len(custom_list_1) != len(custom_list_2):
+        return False
+    else:
+        custom_list_1.sort()
+        custom_list_2.sort()
+        if custom_list_1 == custom_list_2:
+            return True
+        else:
+            return False
+
+print(check_permutation(my_list_q_6a, my_list_q_6b))
+
+
+# Question 7 - Given an image represented by an NxN matrix write a method to rotate the image by 90 degrees
+question_7_array = np.array([[1, 2, 3],
+                             [4, 5, 6],
+                             [7, 8, 9]])
+
+def rotate_matrix(custom_matrix):
+    length_of_matrix = len(custom_matrix)
+    for layer in range(length_of_matrix//2):
+        first = layer
+        last = length_of_matrix - layer - 1
+        for i in range(first, last):
+            # Save the top element
+            top = custom_matrix[layer][i]
+            # Move left element to top
+            custom_matrix[layer][i] = custom_matrix[-i-1][layer]
+            # Move bottom element to left
+            custom_matrix[-i-1][layer] = custom_matrix[-layer-1][-i-1]
+            # Move right element to the bottom
+            custom_matrix[-layer-1][-i-1] = custom_matrix[i][-layer-1]
+            # Move top to right
+            custom_matrix[i][-layer - 1] = top
+
+    return custom_matrix
+
+print(rotate_matrix(question_7_array))
